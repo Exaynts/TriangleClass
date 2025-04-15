@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿﻿#include <iostream>
 #include "Triangle.h"
 using namespace std;
 
@@ -9,6 +9,7 @@ void Show(Triangle* [], int);
 void Move(Triangle* [], int);
 void FindMax(Triangle* [], int);
 void IsIncluded(Triangle* [], int);
+double GetDouble();
 
 // Инициализация глобальных переменных
 int Triangle::count = 0;
@@ -86,17 +87,30 @@ void ExitBack(){
 // вывод всех треугольников
 void Show(Triangle *p_tria[], int k) {
 	cout << "======= Перечень треугольников ========" << endl;
-	for (int i = 0; i < k; ++i) p_tria[i]->Show();
-	for (int i = 0; i < k; ++i) p_tria[i]->ShowSideAndArea();
+	for (int i = 0; i < k; ++i) p_tria[i]->Show();	
 	ExitBack();
 }
 
 // перемещение
 void Move(Triangle* p_tria[], int k) {
 	cout << "============= Перемещение =============" << endl;
-	// здесь будет код функции...
+	cout << "Введите номер треугольника (от 1 до " << k << " ) : ";
+	int i = GetNumber(1, k) - 1;
+	p_tria[i]->Show();
+
+	Point dp;
+	cout << "Введите смещение по х: ";
+	dp.x = GetDouble();
+	cout << "Введите смещение по у: ";
+	dp.y = GetDouble();
+
+	p_tria[i]->Move(dp);
+	cout << "Новое положение треугольника:" << endl;
+	p_tria[i]->Show();
+
 	ExitBack();
 }
+
 // поиск максимального треугольника
 void FindMax(Triangle* p_tria[], int k) {
 	cout << "=== Поиск максимального треугольника ==" << endl;
@@ -108,4 +122,18 @@ void IsIncluded(Triangle* p_tria[], int k) {
 	cout << "======== Отношение включения ==========" << endl;
 	// здесь будет код функции...
 	ExitBack();
+}
+
+double GetDouble() {
+	double value;
+	while (true) {
+		cin >> value;
+		if (cin.peek() == '\n') break;
+		else {
+			cout << "Повторите ввод (ожидается вещественное число):" << endl;
+			cin.clear();
+			while (cin.get() != '\n') {};
+		}
+	}
+	return value;
 }
