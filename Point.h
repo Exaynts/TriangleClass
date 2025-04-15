@@ -1,14 +1,17 @@
 #pragma once
-// Point.h
 #ifndef POINT_H
 #define POINT_H
+
 class Point {
 public:
+	// Êîíñòðóêòîð
+	Point(double _õ = 0, double _ó = 0) : x(_õ), y(_ó) {}
 
-    Point(double _x = 0, double _y = 0) : x(_x), y(_y) {}
+	// Äðóãèå ìåòîäû
+	void Show() const;
 
-    void Show() const;
 public:
-    double x, y;
+	double x, y;
 };
+
 #endif /* POINT_H */
